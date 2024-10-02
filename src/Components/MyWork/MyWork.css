@@ -1,0 +1,120 @@
+.mywork{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    margin: 80px 170px;
+}
+
+.mywork-title {
+    position: relative;
+}
+
+.mywork-title h1 {
+    padding: 0px 30px;
+    font-size: 80px;
+    font-weight: 600;
+}
+
+.mywork-title img {
+    width: 200px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+.mywork-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px ;
+}
+.mywork-container img{
+    box-sizing: border-box;
+    width: 380px;
+    height: 280px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.mywork-container img:hover{
+    transform: scale(1.10);
+    transition: 0.3s;
+}
+.mywork-showmore{
+    display: flex;
+    gap: 15px;
+    border-radius: 50px;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 80px;
+    transition: 0.6s;
+    cursor: pointer;
+}
+.mywork-showmore img{
+    width: 20px;
+}
+.mywork-showmore:hover{
+    gap: 30px;
+    transition: 0.6s;
+}
+
+@media (max-width: 768px) {
+    .mywork {
+        gap: 40px; /* Reduce gap for smaller screens */
+        margin: 40px 20px; /* Reduce margin to fit the smaller screen */
+    }
+
+    .mywork-title h1 {
+        font-size: 45px; /* Smaller font size for better readability */
+    }
+
+    .mywork-title img {
+        width: 100px; /* Reduce image size */
+        bottom: -10px; /* Adjust positioning for better alignment */
+        right: 10px;
+    }
+
+    .mywork-container {
+        grid-template-columns: 1fr 1fr; /* Change to 2 columns on small screens */
+        gap: 20px; /* Reduce gap between items */
+    }
+
+    .mywork-container img {
+        width: 100%; /* Ensure the images use full width */
+        max-width: 300px; /* Limit image width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .mywork-showmore {
+        font-size: 16px; /* Slightly smaller font size */
+        padding: 8px 15px; /* Reduce padding for smaller button */
+        margin-bottom: 40px; /* Reduce bottom margin */
+    }
+
+    .mywork-showmore:hover {
+        gap: 20px; /* Adjust hover gap to prevent excessive movement on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .mywork-title h1 {
+        font-size: 35px; /* Further reduce font size for extra small screens */
+    }
+
+    .mywork-container {
+        grid-template-columns: 1fr; /* Switch to single column layout */
+        gap: 15px; /* Reduce gap between items */
+    }
+
+    .mywork-container img {
+        max-width: 100%; /* Ensure full-width images */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .mywork-showmore {
+        font-size: 14px; /* Even smaller font for very small screens */
+        padding: 6px 10px; /* Reduce padding further */
+    }
+}
