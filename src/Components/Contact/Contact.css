@@ -43,13 +43,13 @@
 }
 .contact-left p{
     max-width: 550px;
-    color: #D8D8D8;
+    /* color: #D8D8D8; */
 }
 .contact-details{
     display: flex;
     flex-direction: column;
     gap: 30px;
-    color: #D8D8D8;
+    /* color: #D8D8D8; */
     font-size: 22px;
 }
 .contact-detail{
@@ -64,7 +64,7 @@
     gap: 20px;
 }
 .contact-right label{
-    color: #D8D8D8;
+    /* color: #D8D8D8; */
     font-size: 22px;
     font-weight: 500;
 }

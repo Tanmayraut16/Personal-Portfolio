@@ -54,7 +54,7 @@
 }
 .anchor-link{
     text-decoration: none;
-    color: white;
+    color: var(--color);
 }
 
 .nav-mob-close{
@@ -88,12 +88,15 @@
         align-items: start;
         top: 0;
         gap: 30px;
-        background-color: #1F0016;
+        /* background-color: var(--menu-color); */
         width: 350px;
         height: 100%;
         z-index: 2;
         transition: right 0.5s;
         right: -350px;
+    }
+    .toggle-box{
+        margin-right: 40px;
     }
     .nav-menu li{
         font-size: 30px;
@@ -114,9 +117,14 @@
         display: none; /* Keep the desktop connect option hidden */
     }
 
+    .toggle-box{
+        margin-right: 30px;
+    }
+
     .nav-mob-open {
         display: block;
         position: fixed;
+        /* left: 10px; */
         right: 20px; /* Adjusted for smaller screens */
         top: 20px; /* Added top positioning for better alignment */
         width: 25px; /* Smaller icon size */

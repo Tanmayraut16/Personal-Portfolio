@@ -6,6 +6,7 @@ import menu_open from '../../assets/menu_open.svg';
 import menu_close from '../../assets/menu_close.svg';
 import underline from '../../assets/nav_underline.svg';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import Toggle from '../Toggle/Toggle';
 
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
@@ -60,7 +61,9 @@ const Navbar = () => {
           {menu === "contact" && <img src={underline} alt="Underline" />}
         </li>
       </ul>
-
+      <div className="toggle-box">
+        <Toggle/>
+      </div>
       <div className='nav-connect'><AnchorLink className='anchor-link' offset={50} href="#contact">
         Connect With Me
         </AnchorLink>

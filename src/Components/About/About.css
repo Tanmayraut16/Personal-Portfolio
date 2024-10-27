@@ -41,7 +41,7 @@
     padding: 20px;
     /* Background color for contrast */
     border-radius: 10px;
-    color: #fff;
+    color: var(--color);
     /* Ensuring the text color is white for readability */
     flex-basis: 60%;
 }
@@ -64,7 +64,7 @@
     font-weight: 500;
     cursor: pointer;
     position: relative;
-    color: #fff;
+    color: var(--color);
     transition: color 0.3s;
 }
 
