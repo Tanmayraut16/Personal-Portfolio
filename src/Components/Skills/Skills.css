@@ -13,7 +13,7 @@
 
 .skills-title h1 {
     padding: 0px 30px;
-    font-size: 80px;
+    font-size: 70px;
     font-weight: 600;
 }
 
@@ -40,7 +40,7 @@
 .skill-programming, 
 .skill-Others {
     height: 200px;
-    max-width: 300px;
+    max-width: 350px;
     padding: 20px;
     border: 2px solid white;
     border-radius: 10px;
@@ -84,12 +84,12 @@ h2 {
 }
 
 .skill-content .skill {
-    padding: 10px 15px;
-    border: 2px solid white;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px 15px;
+    border: 2px solid white;
+    border-radius: 10px;
     gap: 5px;
     background-color:#20201e;
     color: white; /* Adjust color to ensure visibility */
