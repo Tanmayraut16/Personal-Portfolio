@@ -18,21 +18,24 @@ const App = () => {
     }, 3000);
   }, []);
 
-  return (
-    <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen">
-      {isPreloading ? (
+  if (isPreloading)
+    return (
+      <div className="w-full bg-gradient-to-b from-gray-900 to-black min-h-screen overflow-hidden">
         <PreLoader />
-      ) : (
-        <>
-          <Navbar />
-          <Hero />
-          <About />
-          <Skills />
-          <MyWork />
-          <Contact />
-          <Footer />
-        </>
-      )}
+      </div>
+    );
+
+  return (
+    <div className="w-full overflow-x-hidden">
+      <Navbar />
+      <main className="w-full">
+        <Hero />
+        <About />
+        <Skills />
+        <MyWork />
+        <Contact />
+        <Footer />
+      </main>
     </div>
   );
 };
