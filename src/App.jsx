@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Components/Navbar/Navbar';
-import Hero from './Components/Hero/Hero';
-import About from './Components/About/About';
-import Skills from './Components/Skills/Skills';
-import MyWork from './Components/MyWork/MyWork';
-import Contact from './Components/Contact/Contact';
-import Footer from './Components/Footer/Footer';
-import PreLoader from './Components/Preloader/PreLoader';
+import React, { useState, useEffect } from "react";
+import PreLoader from "./Components/Preloader/PreLoader";
+import Navbar from "./Components/Navbar";
+import Hero from "./pages/Hero";
+import About from "./pages/About";
+import Skills from "./pages/Skills";
+import MyWork from "./pages/MyWork";
+import Contact from "./pages/Contact";
+import Footer from "./Components/Footer";
 
 const App = () => {
   const [isPreloading, setIsPreloading] = useState(true);
@@ -19,12 +19,11 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      {isPreloading && <PreLoader />} {/* Show PreLoader when isPreloading is true */}
-      
-      {/* Show main content after preloading is complete */}
-      {!isPreloading && (
-        <div>
+    <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen">
+      {isPreloading ? (
+        <PreLoader />
+      ) : (
+        <>
           <Navbar />
           <Hero />
           <About />
@@ -32,9 +31,9 @@ const App = () => {
           <MyWork />
           <Contact />
           <Footer />
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
 
