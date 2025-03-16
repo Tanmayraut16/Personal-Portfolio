@@ -24,7 +24,7 @@ export const ParticlesBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {activeParticles &&
-        Array(20)
+        Array(200)
           .fill()
           .map((_, i) => (
             <div

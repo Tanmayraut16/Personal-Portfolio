@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import profile_img from "../assets/profile_img.png";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import { ParticlesBackground } from "../Components/ParticlesBackground";
 
 const Hero = () => {
   // const [activeParticles, setActiveParticles] = useState(false);
@@ -78,8 +77,6 @@ const Hero = () => {
         }
       `}</style>
 
-      {/* Particles Background */}
-      <ParticlesBackground />
 
       {/* Container with max width for content */}
       <div className="max-w-4xl w-full flex flex-col items-center z-10">

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import theme_pattern from "../assets/theme_pattern.svg";
-import menu_open from "../assets/menu_open.svg";
-import menu_close from "../assets/menu_close.svg";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+import { Menu, X, Home, User, Code2, Briefcase, Mail, ChevronRight } from 'lucide-react';
 
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
@@ -20,7 +17,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    // Prevent body scrolling when mobile menu is open
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -32,127 +28,127 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const navItems = [
+    { id: "home", label: "Home", icon: Home },
+    { id: "about", label: "About Me", icon: User },
+    { id: "skills", label: "Skills", icon: Code2 },
+    { id: "work", label: "Portfolio", icon: Briefcase },
+    // { id: "contact", label: "Contact", icon: Mail },
+  ];
 
-  const handleMenuClick = (menuItem) => {
-    setMenu(menuItem);
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    const offset = 80; // Height of the navbar
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    setMenu(id);
     setIsMenuOpen(false);
   };
 
-  const navItems = [
-    { id: "home", label: "Home", offset: 0 },
-    { id: "about", label: "About Me", offset: 50 },
-    { id: "skills", label: "Skills", offset: 50 },
-    { id: "work", label: "Portfolio", offset: 50 },
-    { id: "contact", label: "Contact", offset: 50 },
-  ];
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-50 ${scrolled ? 'bg-gray-900/90 backdrop-blur-md shadow-lg' : 'bg-gray-900/70'} transition-all duration-300`}>
-      <div className="w-full mx-auto px-4 max-w-screen-lg">
-        <div className="flex items-center justify-between h-16">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-gray-900/95 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center">
-            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <div className="flex-shrink-0">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               Tanmay
             </h1>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center">
-            <ul className="flex">
-              {navItems.map((item) => (
-                <li key={item.id} className="mx-2">
-                  <AnchorLink href={`#${item.id}`} offset={item.offset}>
-                    <p
-                      onClick={() => handleMenuClick(item.id)}
-                      className={`font-medium py-2 px-3 rounded-md transition-all duration-300 ${
-                        menu === item.id
-                          ? "text-white bg-gradient-to-r from-blue-500/20 to-purple-500/10"
-                          : "text-gray-400 hover:text-white hover:bg-gray-800/30"
-                      }`}
-                    >
-                      {item.label}
-                    </p>
-                  </AnchorLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`
+                    flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                    ${menu === item.id 
+                      ? 'text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20' 
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
+                    }
+                  `}
+                >
+                  <Icon className="w-4 h-4 mr-2" />
+                  {item.label}
+                </button>
+              );
+            })}
+            
             <button
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-              className="p-2 rounded-md"
+              onClick={() => scrollToSection('contact')}
+              className="ml-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-medium flex items-center group"
             >
-              <img
-                src={isMenuOpen ? menu_close : menu_open}
-                alt="Menu"
-                className="w-6 h-6"
-              />
+              Let's Connect
+              <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
 
-          {/* Connect Button (Desktop) */}
-          <div className="hidden lg:block">
-            <AnchorLink
-              href="#contact"
-              offset={50}
-              className="px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-medium"
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-lg text-gray-400 hover:text-white focus:outline-none"
             >
-              Connect With Me
-            </AnchorLink>
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu - Fixed Position Overlay */}
-      {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 bg-gray-900/95 z-40 h-full w-full flex flex-col justify-start pt-16 overflow-y-auto">
-          <div className="w-full mx-auto px-4 max-w-screen-lg">
-            {navItems.map((item) => (
-              <AnchorLink
+      {/* Mobile menu */}
+      <div
+        className={`
+          fixed inset-0 bg-gray-900/98 backdrop-blur-sm transition-transform duration-300 ease-in-out md:hidden
+          ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}
+        style={{ top: '80px' }}
+      >
+        <div className="px-4 py-6 space-y-2">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
                 key={item.id}
-                href={`#${item.id}`}
-                offset={item.offset}
+                onClick={() => scrollToSection(item.id)}
+                className={`
+                  w-full flex items-center px-4 py-3 rounded-lg text-left transition-all duration-200
+                  ${menu === item.id 
+                    ? 'text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-l-2 border-blue-500' 
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
+                  }
+                `}
               >
-                <div
-                  onClick={() => handleMenuClick(item.id)}
-                  className={`py-4 my-1 px-4 rounded-lg transition-all duration-200 ${
-                    menu === item.id
-                      ? "bg-blue-500/20 border-l-2 border-blue-500"
-                      : "hover:bg-gray-800/30"
-                  }`}
-                >
-                  <p
-                    className={`text-lg ${
-                      menu === item.id ? "text-white" : "text-gray-300"
-                    }`}
-                  >
-                    {item.label}
-                  </p>
-                </div>
-              </AnchorLink>
-            ))}
-
-            {/* Connect Button (Mobile) */}
-            <div className="px-4 py-6">
-              <AnchorLink
-                href="#contact"
-                offset={50}
-                onClick={() => setIsMenuOpen(false)}
-                className="block w-full text-center py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md text-white font-medium"
-              >
-                Connect With Me
-              </AnchorLink>
-            </div>
-          </div>
+                <Icon className="w-5 h-5 mr-3" />
+                <span className="text-lg">{item.label}</span>
+              </button>
+            );
+          })}
+          
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-medium flex items-center justify-center group"
+          >
+            Let's Connect
+            <ChevronRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

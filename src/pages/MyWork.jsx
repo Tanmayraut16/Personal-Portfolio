@@ -10,7 +10,6 @@ import {
   MdPause,
   MdPlayCircle,
 } from "react-icons/md";
-import { ParticlesBackground } from "../Components/ParticlesBackground";
 
 const MyWork = () => {
   const [mainProjectIndex, setMainProjectIndex] = useState(0);
@@ -131,7 +130,6 @@ const MyWork = () => {
           </p>
         </div>
 
-        <ParticlesBackground />
         {/* Main Project Display */}
         <div
           className={`flex flex-col lg:flex-row gap-6 p-6 rounded-2xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 shadow-lg border border-blue-500/10 transition-all duration-500 mb-12 ${

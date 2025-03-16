@@ -4,7 +4,6 @@ import theme_pattern from "../assets/theme_pattern.svg";
 import mail_icon from "../assets/mail_icon.svg";
 import location_icon from "../assets/location_icon.svg";
 import call_icon from "../assets/call_icon.svg";
-import { ParticlesBackground } from "../Components/ParticlesBackground";
 
 const Contact = () => {
   const onSubmit = async (event) => {
@@ -44,7 +43,7 @@ const Contact = () => {
 
   return (
     <div id="contact" className="min-h-screen flex items-center justify-center py-20 px-4 md:px-8 relative overflow-hidden">
-      <ParticlesBackground />
+      {/* <ParticlesBackground /> */}
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import theme_pattern from "../assets/theme_pattern.svg";
 import assets from "../assets/assets";
-import { ParticlesBackground } from "../Components/ParticlesBackground";
 
 const Skills = () => {
   const container = {
@@ -71,8 +70,7 @@ const Skills = () => {
 
   return (
     <div id="skills" className="min-h-screen py-20 px-4 md:px-8 relative">
-      <ParticlesBackground />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div

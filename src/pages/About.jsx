@@ -8,7 +8,6 @@ import {
   MapPin,
 } from "lucide-react";
 import profile_img from "../assets/profile_img.png";
-import { ParticlesBackground } from "../Components/ParticlesBackground";
 
 function About() {
   const [activeTab, setActiveTab] = useState("experience");
@@ -44,7 +43,6 @@ function About() {
       id="about"
       className="min-h-screen py-20 px-4 md:px-8 relative"
     >
-      <ParticlesBackground />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
