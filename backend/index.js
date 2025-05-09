@@ -1,60 +1,38 @@
-// index.mjs or server.js (with "type": "module" in package.json)
+// index.mjs (or index.js if "type": "module" in package.json)
 import express from 'express';
 import nodemailer from 'nodemailer';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
 
-// ✅ Correct CORS Configuration
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Replace with your frontend URL
-    credentials: true, // Allow credentials (cookies, sessions)
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// ✅ CORS Setup (Only one place)
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  credentials: true,
+}));
 
-app.options('*', cors());
-
-// ✅ Ensure CORS Headers Are Sent
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    process.env.CORS_ORIGIN || "http://localhost:5173"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
-
-// Middleware
+// ✅ Middleware
 app.use(bodyParser.json());
 
-// Configure nodemailer transporter
+// ✅ Nodemailer Transporter
 const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE, // e.g., 'gmail'
+  service: process.env.EMAIL_SERVICE,
   auth: {
     user: process.env.EMAIL_USERNAME,
-    pass: process.env.EMAIL_PASSWORD, // Use an app password if 2FA is enabled
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-// Contact form endpoint
+// ✅ Contact Endpoint
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      message: 'Please fill in all required fields',
-    });
+    return res.status(400).json({ success: false, message: 'All fields are required.' });
   }
 
   try {
@@ -87,22 +65,15 @@ app.post('/api/contact', async (req, res) => {
 
     await transporter.sendMail(confirmationMailOptions);
 
-    return res.status(200).json({
-      success: true,
-      message: 'Your message has been sent successfully!',
-    });
-  } catch (error) {
-    console.error('Email send error:', error);
-
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to send email. Please try again later.',
-    });
+    return res.status(200).json({ success: true, message: 'Message sent successfully!' });
+  } catch (err) {
+    console.error('Error sending mail:', err);
+    return res.status(500).json({ success: false, message: 'Failed to send message.' });
   }
 });
 
-// Start the server
+// ✅ Server Listen
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
