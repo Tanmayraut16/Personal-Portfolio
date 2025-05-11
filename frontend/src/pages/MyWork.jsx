@@ -437,6 +437,10 @@ const MyWork = () => {
           </div>
         )}
       </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute top-20 -right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 -left-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
     </div>
   );
 };

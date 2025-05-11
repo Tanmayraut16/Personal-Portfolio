@@ -175,7 +175,7 @@ const Hero = () => {
         </div>
 
         {/* Scroll indicator animation */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center mt-16 animate-bounce hidden md:flex">
+        <div className="absolute bottom-10 transform -translate-x-1/2 flex flex-col items-center mt-16 animate-bounce md:flex">
           <span className="text-sm text-gray-400 mb-2 font-mono">// scroll down</span>
           <svg
             className="w-6 h-6 text-blue-400"
@@ -190,6 +190,10 @@ const Hero = () => {
           </svg>
         </div>
       </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute top-20 -right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 -left-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
     </div>
   );
 };
