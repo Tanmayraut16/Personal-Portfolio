@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Mail,
   Phone,
   MapPin,
   Code,
-  Send,
   User,
   MessageSquare,
   ArrowRight
 } from "lucide-react";
+import PropTypes from "prop-types";
 
 function Contact() {
   const [formStatus, setFormStatus] = useState({
@@ -106,6 +106,8 @@ function Contact() {
         success: false,
         message: "Unable to send message. Please try again later.",
       });
+      console.log("Error : ", error);
+      
     }
   };
 
@@ -184,7 +186,7 @@ function Contact() {
 
               <div className="space-y-4">
                 <p className="text-gray-300">
-                  Let's collaborate and bring your ideas to life. Reach out and I'll get back to you within 24 hours.
+                  {`Let's`} collaborate and bring your ideas to life. Reach out and {`I'll`} get back to you within 24 hours.
                 </p>
                 
                 {contactInfo.map((info, index) => (
@@ -314,5 +316,12 @@ function ContactInfoItem({ icon, text, label, color }) {
     </div>
   );
 }
+
+ContactInfoItem.propTypes = {
+  icon: PropTypes.node.isRequired,
+  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 export default Contact;

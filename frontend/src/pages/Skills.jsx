@@ -1,12 +1,25 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Cpu, Globe, Database, Terminal, Hammer } from "lucide-react";
 import {
-  Cpu,
-  Globe,
-  Database,
-  Terminal,
-  Hammer
-} from "lucide-react";
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiMongodb,
+  SiFirebase,
+  SiPython,
+  SiMysql,
+  SiCplusplus,
+  SiC,
+  SiGit,
+  SiGithub,
+  SiPostman,
+  SiCanva,
+} from "react-icons/si";
 import assets from "../assets/assets";
 
 const Skills = () => {
@@ -44,14 +57,14 @@ const Skills = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   const skillCategories = [
@@ -60,25 +73,25 @@ const Skills = () => {
       icon: <Globe className="w-4 h-4" />,
       color: "cyan",
       skills: [
-        { icon: assets.html_logo, name: "HTML" },
-        { icon: assets.css, name: "CSS" },
-        { icon: assets.js, name: "Javascript" },
-        { icon: assets.react, name: "React" },
-        { icon: assets.tailwind, name: "Tailwind" },
-        { icon: assets.next, name: "Next.js" }
-      ]
+        { icon: <SiHtml5 />, name: "HTML" },
+        { icon: <SiCss3 />, name: "CSS" },
+        { icon: <SiJavascript />, name: "JavaScript" },
+        { icon: <SiReact />, name: "React" },
+        { icon: <SiTailwindcss />, name: "Tailwind" },
+        { icon: <SiNextdotjs />, name: "Next.js" },
+      ],
     },
     {
       title: "Backend",
       icon: <Database className="w-4 h-4" />,
       color: "indigo",
       skills: [
-        { icon: assets.node, name: "Node.js" },
-        { icon: assets.mongo, name: "MongoDB" },
-        { icon: assets.firebase_logo, name: "Firebase" },
-        { icon: assets.python, name: "Python" },
-        { icon: assets.sql, name: "MySQL" }
-      ]
+        { icon: <SiNodedotjs />, name: "Node.js" },
+        { icon: <SiMongodb />, name: "MongoDB" },
+        { icon: <SiFirebase />, name: "Firebase" },
+        { icon: <SiPython />, name: "Python" },
+        { icon: <SiMysql />, name: "MySQL" },
+      ],
     },
     {
       title: "Programming",
@@ -86,24 +99,29 @@ const Skills = () => {
       color: "purple",
       skills: [
         { icon: assets.java_logo, name: "Java" },
-        { icon: assets.cpp, name: "C++" },
-        { icon: assets.python, name: "Python" },
-        { icon: assets.c_logo, name: "C" }
-      ]
+        { icon: <SiCplusplus />, name: "C++" },
+        { icon: <SiPython />, name: "Python" },
+        { icon: <SiC />, name: "C" },
+      ],
     },
     {
       title: "Tools & Others",
       icon: <Hammer className="w-4 h-4" />,
       color: "pink",
       skills: [
-        { icon: assets.git, name: "Git" },
-        { icon: assets.github, name: "Github" },
-        { icon: assets.postman, name: "Postman" },
+        { icon: <SiGit />, name: "Git" },
+        { icon: <SiGithub />, name: "GitHub" },
+        { icon: <SiPostman />, name: "Postman" },
         { icon: assets.vs, name: "VS Code" },
-        { icon: assets.canva, name: "Canva" },
-        { icon: assets.ps, name: "Problem Solving" }
-      ]
-    }
+        { icon: <SiCanva />, name: "Canva" },
+        {
+          icon: (
+            <img src={assets.ps} alt="Problem Solving" className="w-6 h-6" />
+          ),
+          name: "Problem Solving",
+        },
+      ],
+    },
   ];
 
   return (
@@ -145,19 +163,27 @@ const Skills = () => {
               key={category.title}
               variants={item}
               className={`bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 group ${
-                isVisible ? idx % 2 === 0 ? "animate-fade-right" : "animate-fade-left" : "opacity-0"
+                isVisible
+                  ? idx % 2 === 0
+                    ? "animate-fade-right"
+                    : "animate-fade-left"
+                  : "opacity-0"
               }`}
             >
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-${category.color}-500/20 text-${category.color}-400 mr-3`}>
+                  <div
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center bg-${category.color}-500/20 text-${category.color}-400 mr-3`}
+                  >
                     {category.icon}
                   </div>
-                  <h3 className={`text-2xl font-mono font-bold text-${category.color}-400`}>
+                  <h3
+                    className={`text-2xl font-mono font-bold text-${category.color}-400`}
+                  >
                     {category.title}
                   </h3>
                 </div>
-                
+
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 rounded-full bg-red-500"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
@@ -183,12 +209,16 @@ const Skills = () => {
                     className="bg-gray-800/50 p-3 rounded-lg border border-gray-700/50 hover:border-gray-500/50 transition-all duration-300"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 p-1.5 group-hover:scale-110 transition-transform duration-300">
-                        <img
-                          src={skill.icon}
-                          alt={skill.name}
-                          className="w-full h-full object-contain"
-                        />
+                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 p-1.5 group-hover:scale-110 transition-transform duration-300 text-white">
+                        {typeof skill.icon === "string" ? (
+                          <img
+                            src={skill.icon}
+                            alt={skill.name}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          skill.icon
+                        )}
                       </div>
                       <span className="text-gray-300 text-sm font-mono font-medium group-hover:text-white transition-colors">
                         {skill.name}
@@ -205,7 +235,6 @@ const Skills = () => {
       {/* Decorative Elements */}
       <div className="absolute top-20 -right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 -left-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
     </div>
   );
 };
