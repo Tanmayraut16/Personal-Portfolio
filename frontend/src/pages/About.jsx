@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   GraduationCap,
-  Briefcase,
   Terminal,
   Award,
   Calendar,
@@ -13,6 +12,7 @@ import {
   Cpu,
 } from "lucide-react";
 import profile_img from "../assets/profile_img.png";
+import PropTypes from "prop-types";
 
 function About() {
   const [activeTab, setActiveTab] = useState("experience");
@@ -151,10 +151,10 @@ function About() {
                   <a href="#" className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-2 py-1 rounded-md transition-colors">
                     LinkedIn
                   </a>
-                  <a href="#" className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-2 py-1 rounded-md transition-colors">
+                  <a href="https://github.com/Tanmayraut16" className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-2 py-1 rounded-md transition-colors">
                     GitHub
                   </a>
-                  <a href="#" className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-2 py-1 rounded-md transition-colors">
+                  <a href="https://leetcode.com/u/Tanmay_Raut16/" className="bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 px-2 py-1 rounded-md transition-colors">
                     LeetCode
                   </a>
                 </div>
@@ -292,7 +292,7 @@ function About() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fade-up {
           from {
             opacity: 0;
@@ -341,6 +341,8 @@ function About() {
   );
 }
 
+
+
 function TimelineItem({ title, organization, date, description, icon, color }) {
   return (
     <div
@@ -368,6 +370,15 @@ function TimelineItem({ title, organization, date, description, icon, color }) {
   );
 }
 
+TimelineItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  organization: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
 function SkillBadge({ name, level, color }) {
   return (
     <div className="bg-gray-800/60 border border-gray-700/50 rounded-lg p-3 hover:bg-gray-800/80 transition-all duration-300">
@@ -384,5 +395,11 @@ function SkillBadge({ name, level, color }) {
     </div>
   );
 }
+
+SkillBadge.propTypes = {
+  name: PropTypes.string.isRequired,
+  level: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 export default About;

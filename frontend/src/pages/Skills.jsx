@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Code,
   Cpu,
   Globe,
   Database,
@@ -129,7 +128,7 @@ const Skills = () => {
             </h1>
           </div>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4 font-mono">
-            // expertise across the full stack development spectrum
+            {`// expertise across the full stack development spectrum`}
           </p>
         </div>
 

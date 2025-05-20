@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { 
+import { useState, useEffect, useRef } from "react";
+import {
   Code,
   ExternalLink,
   Info,
   Layers,
   ChevronLeft,
   ChevronRight,
-  X
+  X,
 } from "lucide-react";
 import mywork_data from "../assets/mywork_data";
 
@@ -51,26 +51,26 @@ const MyWork = () => {
   const getVisibleProjects = () => {
     const projectCount = mywork_data.length;
     const projects = [];
-    
+
     // Get main visible projects (center and adjacent)
     for (let i = -1; i <= 1; i++) {
       const index = (currentIndex + i + projectCount) % projectCount;
       projects.push({
         ...mywork_data[index],
-        position: i // -1 = left, 0 = center, 1 = right
+        position: i, // -1 = left, 0 = center, 1 = right
       });
     }
-    
+
     return projects;
   };
 
   // Handle navigation with transition blocking
   const navigate = (direction) => {
     if (isTransitioning) return;
-    
+
     setIsTransitioning(true);
-    
-    setCurrentIndex(prevIndex => {
+
+    setCurrentIndex((prevIndex) => {
       const projectCount = mywork_data.length;
       if (direction === "next") {
         return (prevIndex + 1) % projectCount;
@@ -78,10 +78,10 @@ const MyWork = () => {
         return (prevIndex - 1 + projectCount) % projectCount;
       }
     });
-    
+
     // Reset autoplay timer when user navigates manually
     setAutoPlay(true);
-    
+
     // Prevent rapid navigation during transitions
     setTimeout(() => {
       setIsTransitioning(false);
@@ -98,7 +98,7 @@ const MyWork = () => {
   // Handle mouse/touch events for dragging
   const handleDragStart = (e) => {
     if (isTransitioning) return;
-    
+
     setIsDragging(true);
     setStartX(e.clientX || (e.touches && e.touches[0].clientX) || 0);
     setAutoPlay(false); // Pause autoplay when user starts dragging
@@ -106,10 +106,10 @@ const MyWork = () => {
 
   const handleDragMove = (e) => {
     if (!isDragging || isTransitioning) return;
-    
+
     const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
     const diff = currentX - startX;
-    
+
     // Use a threshold to prevent accidental swipes
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
@@ -137,7 +137,7 @@ const MyWork = () => {
         setShowModal(false);
       }
     };
-    
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -147,23 +147,22 @@ const MyWork = () => {
   // Auto-rotate carousel every 5 seconds when not interacting
   useEffect(() => {
     let interval;
-    
+
     if (autoPlay && !showModal && !isDragging && !isTransitioning) {
       interval = setInterval(() => {
         navigate("next");
       }, 5000);
     }
-    
+
     return () => clearInterval(interval);
   }, [autoPlay, showModal, isDragging, isTransitioning]);
 
   // Pause autoplay when user hovers over carousel
   const handleMouseEnter = () => setAutoPlay(false);
-  const handleMouseLeave = () => setAutoPlay(true);
 
   // Get the visible projects
   const visibleProjects = getVisibleProjects();
-  
+
   // Handle modal closing
   const closeModal = () => {
     setShowModal(false);
@@ -171,12 +170,9 @@ const MyWork = () => {
       setSelectedProject(null);
     }, 300); // Wait for fade-out animation
   };
-  
+
   return (
-    <div
-      id="work"
-      className="min-h-screen py-20 px-4 md:px-8 relative"
-    >
+    <div id="work" className="min-h-screen py-20 px-4 md:px-8 relative">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div
@@ -197,15 +193,15 @@ const MyWork = () => {
             </h1>
           </div>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mt-6">
-            A showcase of my best work, blending creativity and
-            technology to build meaningful applications.
+            A showcase of my best work, blending creativity and technology to
+            build meaningful applications.
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div 
+        <div
           ref={carouselRef}
-          className={`relative h-[550px] mb-16 select-none ${
+          className={`relative h-[550px] mb-7 select-none ${
             isVisible ? "animate-fade-up" : "opacity-0"
           }`}
           onMouseDown={handleDragStart}
@@ -218,15 +214,15 @@ const MyWork = () => {
           onMouseEnter={handleMouseEnter}
         >
           {/* Control Buttons */}
-          <button 
+          <button
             onClick={() => navigate("prev")}
             className="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 backdrop-blur-sm text-cyan-400 rounded-full p-3 opacity-80 hover:opacity-100 transition-all shadow-lg border border-gray-700/50 hover:scale-110 active:scale-90"
             aria-label="Previous project"
           >
             <ChevronLeft size={28} />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => navigate("next")}
             className="absolute right-4 md:right-10 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/80 backdrop-blur-sm text-cyan-400 rounded-full p-3 opacity-80 hover:opacity-100 transition-all shadow-lg border border-gray-700/50 hover:scale-110 active:scale-90"
             aria-label="Next project"
@@ -239,14 +235,14 @@ const MyWork = () => {
             {visibleProjects.map((project) => {
               // Define position-based styling
               const isCenter = project.position === 0;
-              
+
               // Calculate styles based on position
               const xPosition = project.position * 400;
               const scale = isCenter ? 1 : 0.75;
               const opacity = isCenter ? 1 : 0.5;
               const zIndex = isCenter ? 10 : 5;
               const rotateY = project.position * 10;
-              
+
               return (
                 <div
                   key={`${project.title}-${project.position}`}
@@ -254,14 +250,14 @@ const MyWork = () => {
                   style={{
                     transform: `translateX(${xPosition}px) scale(${scale}) rotateY(${rotateY}deg)`,
                     opacity: opacity,
-                    zIndex: zIndex
+                    zIndex: zIndex,
                   }}
                 >
-                  <div 
+                  <div
                     className={`w-[320px] md:w-[500px] bg-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 border border-gray-700/50 shadow-lg ${
-                      isCenter 
-                        ? 'cursor-pointer hover:shadow-2xl hover:-translate-y-2' 
-                        : 'pointer-events-none filter contrast-75'
+                      isCenter
+                        ? "cursor-pointer hover:shadow-2xl hover:-translate-y-2"
+                        : "pointer-events-none filter contrast-75"
                     }`}
                     onClick={() => isCenter && handleProjectClick(project)}
                   >
@@ -275,19 +271,26 @@ const MyWork = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent flex items-end p-6">
                         <div>
-                          <h3 className="text-2xl font-bold font-mono text-white">{project.title}</h3>
+                          <h3 className="text-2xl font-bold font-mono text-white">
+                            {project.title}
+                          </h3>
                           {isCenter && (
                             <div className="flex items-center mt-2">
-                              <span className="text-sm text-gray-300 mr-2">View Details</span>
+                              <span className="text-sm text-gray-300 mr-2">
+                                View Details
+                              </span>
                               <span className="w-6 h-6 rounded-full bg-cyan-500 flex items-center justify-center">
-                                <ExternalLink size={14} className="text-white" />
+                                <ExternalLink
+                                  size={14}
+                                  className="text-white"
+                                />
                               </span>
                             </div>
                           )}
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Tech Tags */}
                     <div className="p-5">
                       <div className="flex flex-wrap gap-2">
@@ -314,23 +317,47 @@ const MyWork = () => {
         </div>
 
         {/* Pagination Dots */}
-        <div className={`flex justify-center gap-2 mb-8 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+        <div
+          className={`flex justify-center gap-2 mt-4 mb-4 ${
+            isVisible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
           {mywork_data.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`transition-all duration-300 rounded-full ${
-                index === currentIndex 
-                  ? 'bg-cyan-500 w-8 h-2' 
-                  : 'bg-gray-600 hover:bg-gray-400 w-2 h-2'
+                index === currentIndex
+                  ? "bg-cyan-500 w-8 h-2"
+                  : "bg-gray-600 hover:bg-gray-400 w-2 h-2"
               }`}
               aria-label={`Go to project ${index + 1}`}
             />
           ))}
         </div>
 
+        {/* Show More Link */}
+        <div
+          className={`flex justify-center ${
+            isVisible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
+          <a
+            href="https://github.com/Tanmayraut16?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 font-mono text-sm hover:underline hover:text-cyan-300 transition"
+          >
+            Show more projects →
+          </a>
+        </div>
+
         {/* Swipe Instruction for Mobile */}
-        <div className={`text-center text-gray-400 text-sm mb-10 md:hidden ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+        <div
+          className={`text-center text-gray-400 text-sm mb-10 md:hidden ${
+            isVisible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
           <p>← Swipe to navigate projects →</p>
         </div>
 
@@ -348,13 +375,13 @@ const MyWork = () => {
                 <>
                   {/* Modal Header with Hero Image */}
                   <div className="relative">
-                    <img 
-                      src={selectedProject.w_img} 
+                    <img
+                      src={selectedProject.w_img}
                       alt={selectedProject.title}
                       className="w-full h-[300px] object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
-                    
+
                     {/* Close Button */}
                     <button
                       onClick={closeModal}
@@ -363,7 +390,7 @@ const MyWork = () => {
                     >
                       <X size={24} />
                     </button>
-                    
+
                     {/* Project Title on Image */}
                     <div className="absolute bottom-0 left-0 p-6">
                       <h2 className="text-3xl md:text-4xl font-bold font-mono text-white mb-1">
@@ -371,7 +398,7 @@ const MyWork = () => {
                       </h2>
                     </div>
                   </div>
-                  
+
                   {/* Modal Content */}
                   <div className="p-8">
                     {/* Description with Icon */}
@@ -386,7 +413,7 @@ const MyWork = () => {
                         {selectedProject.description}
                       </p>
                     </div>
-                    
+
                     {/* Tech Stack with Icon */}
                     <div className="mb-8">
                       <h3 className="text-xl font-medium text-white mb-4 flex items-center font-mono">
@@ -406,7 +433,7 @@ const MyWork = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Actions */}
                     <div className="flex flex-wrap gap-4">
                       {selectedProject.github && (
