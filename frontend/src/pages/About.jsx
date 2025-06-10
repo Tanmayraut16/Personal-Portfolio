@@ -10,6 +10,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import profile_img from "../assets/profile_img.png";
+import banner from "../assets/leetcode_banner.png";
 import PropTypes from "prop-types";
 
 function About() {
@@ -81,9 +82,19 @@ function About() {
           >
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 sticky top-8">
               {/* Profile Image */}
-              <div className="relative mb-6 group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
-                <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-2xl overflow-hidden">
+              <div className="relative mb-16 group">
+                <div className="relative h-24 sm:h-28 w-full rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 group-hover:opacity-50 transition duration-500">
+                    <img
+                      src={banner}
+                      alt="LeetCode Streak Banner"
+                      className="w-full h-full object-fill object-left"
+                    />
+                  </div>
+                </div>
+
+                {/* Profile image container - positioned to overlap banner */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 sm:-bottom-12 w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden z-10 ">
                   <img
                     src={profile_img}
                     alt="Tanmay Raut"

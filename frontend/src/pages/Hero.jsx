@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import character_img from "../assets/folio-hero-removebg.png";
-import { FaGithub, FaLinkedin, FaTwitter, FaCode } from "react-icons/fa";
+import resume from "../assets/TanmayResume-3.pdf";
+import { FaGithub, FaLinkedin, FaCode } from "react-icons/fa";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const Hero = () => {
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
-  const fullText = "Full Stack Developer | Tech Enthusiast";
+  const fullText = "Full Stack Developer | ML Enthusiast";
   const typingSpeed = 80;
 
   const handleRedirect = (platform) => {
     const urls = {
       github: "https://github.com/Tanmayraut16",
       linkedin: "https://www.linkedin.com/in/tanmay-raut-416303257",
-      twitter: "https://twitter.com"
+      twitter: "https://twitter.com",
     };
     window.open(urls[platform], "_blank");
   };
@@ -34,12 +35,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <div id="home" className="flex items-center justify-center min-h-screen px-4 py-10 text-white relative overflow-hidden">
+    <div
+      id="home"
+      className="flex items-center justify-center min-h-screen px-4 py-10 text-white relative overflow-hidden"
+    >
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
-        
         {/* Left Content */}
         <div className="order-2 lg:order-1 space-y-8 text-center lg:text-left">
-
           <div className="space-y-2">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">
               <span className="block text-gray-300">Hi, {`I'm`}</span>
@@ -49,7 +51,7 @@ const Hero = () => {
             </h1>
 
             <div className="font-mono lg:pt-2 text-lg md:text-xl text-gray-400">
-              <span className="text-green-400">$</span> 
+              <span className="text-green-400">$</span>
               <span className="text-blue-400 ml-2">whoami</span>
               <span className="text-white ml-2">--role</span>
             </div>
@@ -70,13 +72,14 @@ const Hero = () => {
           </div>
 
           <p className="text-base md:text-lg text-gray-300 leading-relaxed px-2 lg:px-0">
-            I build clean, efficient web apps using modern tools and a creative eye.
+            I build clean, efficient web apps using modern tools and a creative
+            eye.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-row gap-4 pt-4 justify-center lg:justify-start">
             <AnchorLink
-              href="#projects"
+              href="#work"
               offset={50}
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-700 rounded-lg font-semibold text-center transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 overflow-hidden"
             >
@@ -87,18 +90,21 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </AnchorLink>
 
-            <AnchorLink
-              href="#contact"
-              offset={50}
-              className="group px-8 py-4 border-2 border-blue-500 rounded-lg font-semibold text-center transition-all duration-300 hover:bg-blue-500/10 hover:scale-105 hover:border-blue-400"
+            <a
+              href={resume} // Make sure resume.pdf is in your public folder
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 border-2 border-blue-500 rounded-lg font-semibold text-center transition-all duration-300 hover:bg-blue-500/10 hover:scale-105 hover:border-blue-400 inline-block"
             >
-              {`Let's`} Collaborate
-            </AnchorLink>
+              Check Resume
+            </a>
           </div>
 
           {/* Social Links */}
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-            <span className="text-gray-400 font-mono text-sm">Connect with me:</span>
+            <span className="text-gray-400 font-mono text-sm">
+              Connect with me:
+            </span>
             <div className="flex gap-4">
               <FaGithub
                 onClick={() => handleRedirect("github")}
@@ -106,10 +112,6 @@ const Hero = () => {
               />
               <FaLinkedin
                 onClick={() => handleRedirect("linkedin")}
-                className="text-2xl cursor-pointer transition-all duration-300 hover:text-blue-400 hover:scale-125"
-              />
-              <FaTwitter
-                onClick={() => handleRedirect("twitter")}
                 className="text-2xl cursor-pointer transition-all duration-300 hover:text-blue-400 hover:scale-125"
               />
             </div>
@@ -120,7 +122,10 @@ const Hero = () => {
         <div className="order-1 mt-12 lg:order-2 flex justify-center lg:justify-end">
           <div className="relative">
             <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-green-500/20 rounded-full blur-2xl animate-pulse" />
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-full blur-xl animate-spin opacity-50" style={{ animationDuration: '8s' }} />
+            <div
+              className="absolute -inset-4 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-full blur-xl animate-spin opacity-50"
+              style={{ animationDuration: "8s" }}
+            />
 
             <div className="relative z-10">
               <img
@@ -144,7 +149,9 @@ const Hero = () => {
       {/* Scroll Indicator */}
       <div className="hidden lg:visible absolute bottom-6 left-1/2 transform -translate-x-1/2">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xs text-gray-500 font-mono">scroll to explore</span>
+          <span className="text-xs text-gray-500 font-mono">
+            scroll to explore
+          </span>
           <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-blue-400 rounded-full animate-bounce mt-2" />
           </div>
