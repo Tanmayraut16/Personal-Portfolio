@@ -74,6 +74,21 @@ function Contact() {
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData);
 
+    // Allowed email domains whitelist
+    const allowedDomains = ['gmail.com', 'outlook.com', 'yahoo.com', 'hotmail.com'];
+
+    // Extract domain from entered email
+    const emailDomain = formValues.email.split('@')[1]?.toLowerCase();
+
+    if (!allowedDomains.includes(emailDomain)) {
+      setFormStatus({
+        submitting: false,
+        success: false,
+        message: `Please use an email from one of the following domains: ${allowedDomains.join(', ')}`,
+      });
+      return;
+    }
+
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: "POST",
@@ -91,7 +106,6 @@ function Contact() {
           success: true,
           message: "Thank you! Your message has been sent successfully.",
         });
-        // Reset form
         event.target.reset();
       } else {
         setFormStatus({
@@ -107,7 +121,6 @@ function Contact() {
         message: "Unable to send message. Please try again later.",
       });
       console.log("Error : ", error);
-      
     }
   };
 
@@ -126,7 +139,7 @@ function Contact() {
     },
     { 
       icon: <MapPin className="w-4 h-4" />, 
-      text: "Gadchiroli, India", 
+      text: "Maharashtra, India", 
       label: "Location",
       color: "cyan" 
     }

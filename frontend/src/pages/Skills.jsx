@@ -11,6 +11,8 @@ import {
   SiNodedotjs,
   SiMongodb,
   SiFirebase,
+  SiPostgresql,
+  SiExpress,
   SiPython,
   SiMysql,
   SiCplusplus,
@@ -88,9 +90,10 @@ const Skills = () => {
       skills: [
         { icon: <SiNodedotjs />, name: "Node.js" },
         { icon: <SiMongodb />, name: "MongoDB" },
-        { icon: <SiFirebase />, name: "Firebase" },
-        { icon: <SiPython />, name: "Python" },
+        { icon: <SiExpress />, name: "Express" },
         { icon: <SiMysql />, name: "MySQL" },
+        { icon: <SiPostgresql />, name: "PostgreSQL" },
+        { icon: <SiFirebase />, name: "Firebase" },
       ],
     },
     {
